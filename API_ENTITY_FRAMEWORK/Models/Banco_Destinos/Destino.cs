@@ -17,5 +17,16 @@ public class Destino
     public string Cidade { get; set; } = string.Empty;
     [JsonIgnore]
     public virtual List<PontoTuristico> PontosTuristicos { get; set; } = new();
+    public Destino()
+    {
+        
+    }
+
+    public Destino(string localDestino, string pais, string cidade)
+    {
+        LocalDestino = localDestino;
+        Pais = pais;
+        Cidade = cidade;
+    }
 }
 

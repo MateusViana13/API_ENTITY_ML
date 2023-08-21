@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 
 namespace API_ENTITY_FRAMEWORK.Repository;
+
 public interface IBaseRepository<TDbContext, TClass> where TClass : class where TDbContext : DbContext
 {
     Task<TClass> AddAsync(TClass entity);

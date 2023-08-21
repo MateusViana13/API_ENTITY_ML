@@ -1,4 +1,6 @@
 ﻿
+using API_ENTITY_FRAMEWORK.MiddleWare.Exceptions;
+
 public class ExceptionHandlerMiddleware
 {
     private readonly RequestDelegate _next;
@@ -15,6 +17,13 @@ public class ExceptionHandlerMiddleware
         try
         {
             await _next(context);
+        }
+        catch(DataNotFoundException ex)
+        {
+            _logger.LogError(ex, $"Recurso não encontrado: {ex.Message}");
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+            context.Response.ContentType = "text/plain";
+            await context.Response.WriteAsync(ex.Message);
         }
         catch (Exception ex)
         {
